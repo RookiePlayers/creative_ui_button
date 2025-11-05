@@ -62,7 +62,10 @@ class _ScaleTapState extends State<ScaleTap>
       duration: widget.duration ?? ScaleTapConfig.duration ?? defaultDuration,
     );
     _scale = Tween<double>(begin: 1.0, end: 1.0).animate(_animationController);
-    _opacity = Tween<double>(begin: 1.0, end: 1.0).animate(_animationController);
+    _opacity = Tween<double>(
+      begin: 1.0,
+      end: 1.0,
+    ).animate(_animationController);
   }
 
   @override
@@ -72,30 +75,32 @@ class _ScaleTapState extends State<ScaleTap>
     super.dispose();
   }
 
-  Future<void> anim({double? scale, double? opacity, Duration? duration}) async {
+  Future<void> anim({
+    double? scale,
+    double? opacity,
+    Duration? duration,
+  }) async {
     if (!mounted) return;
     _animationController.stop();
     _animationController.duration = duration ?? Duration.zero;
 
-    _scale = Tween<double>(
-      begin: _scale.value,
-      end: scale,
-    ).animate(CurvedAnimation(
-      curve: widget.scaleCurve ??
-          ScaleTapConfig.scaleCurve ??
-          defaultScaleCurve,
-      parent: _animationController,
-    ));
+    _scale = Tween<double>(begin: _scale.value, end: scale).animate(
+      CurvedAnimation(
+        curve:
+            widget.scaleCurve ?? ScaleTapConfig.scaleCurve ?? defaultScaleCurve,
+        parent: _animationController,
+      ),
+    );
 
-    _opacity = Tween<double>(
-      begin: _opacity.value,
-      end: opacity,
-    ).animate(CurvedAnimation(
-      curve: widget.opacityCurve ??
-          ScaleTapConfig.opacityCurve ??
-          defaultOpacityCurve,
-      parent: _animationController,
-    ));
+    _opacity = Tween<double>(begin: _opacity.value, end: opacity).animate(
+      CurvedAnimation(
+        curve:
+            widget.opacityCurve ??
+            ScaleTapConfig.opacityCurve ??
+            defaultOpacityCurve,
+        parent: _animationController,
+      ),
+    );
 
     _animationController.reset();
     await _animationController.forward();
@@ -103,10 +108,12 @@ class _ScaleTapState extends State<ScaleTap>
 
   Future<void> _onTapDown(_) {
     return anim(
-      scale: widget.scaleMinValue ??
+      scale:
+          widget.scaleMinValue ??
           ScaleTapConfig.scaleMinValue ??
           defaultScaleMinValue,
-      opacity: widget.opacityMinValue ??
+      opacity:
+          widget.opacityMinValue ??
           ScaleTapConfig.opacityMinValue ??
           defaultScaleOpacityValue,
       duration: widget.duration ?? ScaleTapConfig.duration ?? defaultDuration,
@@ -174,12 +181,8 @@ class CurveSpring extends Curve {
 }
 
 SpringSimulation _sim(double stiffness, double damping) => SpringSimulation(
-      SpringDescription.withDampingRatio(
-        mass: 1,
-        stiffness: stiffness,
-        ratio: 0.7,
-      ),
-      0.0,
-      1.0,
-      0.0,
-    );
+  SpringDescription.withDampingRatio(mass: 1, stiffness: stiffness, ratio: 0.7),
+  0.0,
+  1.0,
+  0.0,
+);

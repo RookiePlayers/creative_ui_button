@@ -4,29 +4,29 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/widgets.dart';
 
 /// ## Problem: Devices Have Different Screen Sizes
-/// 
+///
 /// - Phones, tablets, and desktops all have different dimensions and pixel densities.
 /// - Hardcoding values such as `fontSize: 16`, `offset: Offset(20, 10)`, or `alignment: Alignment(1, -1)`
 ///   can result in inconsistent appearance and behavior across devices.
-/// 
+///
 /// ### Example
 /// - `fontSize: 16` may look appropriate on a phone, but appear too small on a tablet.
 /// - `offset(30, 0)` might move a widget too far on small screens and not enough on large screens.
-/// 
+///
 /// ---
-/// 
+///
 /// ## Goal: Normalize UI Behavior Across Devices
-/// 
+///
 /// The objective is to create a system where UI elements feel proportional regardless of screen size:
 /// - Fonts scale naturally
 /// - Icons remain readable
 /// - Transforms and alignment are consistent
 /// - Spacing is balanced
-/// 
+///
 /// ---
-/// 
+///
 /// ## How ScreenUtils Solves This
-/// 
+///
 /// 1. Detects the screen size to enable responsive scaling and layout adjustments.
 /// 	•	This gets the screen size (in logical pixels) without needing a BuildContext.
 /// 	•	We normalize it so that width is always the shorter side (portrait logic).
@@ -99,12 +99,7 @@ class ScreenUtils {
     double right = 0,
     double bottom = 0,
   }) =>
-      EdgeInsets.fromLTRB(
-        scale(left),
-        scale(top),
-        scale(right),
-        scale(bottom),
-      );
+      EdgeInsets.fromLTRB(scale(left), scale(top), scale(right), scale(bottom));
 
   bool get isAndroid => Platform.isAndroid;
   bool get isIos => Platform.isIOS;
@@ -123,6 +118,15 @@ double fontSize(double size) => ScreenUtils.instance.font(size);
 double iconSize(double size) => ScreenUtils.instance.icon(size);
 Offset offset(double x, double y) => ScreenUtils.instance.offset(x, y);
 Alignment align(double x, double y) => ScreenUtils.instance.alignment(x, y);
-EdgeInsets padding({double left = 0, double top = 0, double right = 0, double bottom = 0}) =>
-    ScreenUtils.instance.padding(left: left, top: top, right: right, bottom: bottom);
+EdgeInsets padding({
+  double left = 0,
+  double top = 0,
+  double right = 0,
+  double bottom = 0,
+}) => ScreenUtils.instance.padding(
+  left: left,
+  top: top,
+  right: right,
+  bottom: bottom,
+);
 bool get isTablet => ScreenUtils.instance.isTablet;

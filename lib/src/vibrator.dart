@@ -1,20 +1,21 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:vibration/vibration.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 
 class Vibrator {
-  static vibrate(
-      {bool sound = false, String soundUrl = "assets/sfx/ding_wet.wav"}) async {
+  static vibrate({
+    bool sound = false,
+    String soundUrl = "assets/sfx/ding_wet.wav",
+  }) async {
     try {
       // Check if the device can vibrate
       bool canVibrate = (await Vibration.hasVibrator());
-  
-      if (canVibrate && (await Vibration.hasAmplitudeControl()) ) {
+
+      if (canVibrate && (await Vibration.hasAmplitudeControl())) {
         Vibration.vibrate(amplitude: 128);
       }
     } catch (e) {
-     debugPrint('Error in vibrate: $e');
+      debugPrint('Error in vibrate: $e');
     }
   }
 
@@ -25,7 +26,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.selection);
       }
     } catch (e) {
-     debugPrint('Error in feedback: $e');
+      debugPrint('Error in feedback: $e');
     }
   }
 
@@ -36,7 +37,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.success);
       }
     } catch (e) {
-     debugPrint('Error in success: $e');
+      debugPrint('Error in success: $e');
     }
   }
 
@@ -47,7 +48,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.warning);
       }
     } catch (e) {
-     debugPrint('Error in warn: $e');
+      debugPrint('Error in warn: $e');
     }
   }
 
@@ -58,7 +59,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.error);
       }
     } catch (e) {
-     debugPrint('Error in error: $e');
+      debugPrint('Error in error: $e');
     }
   }
 
@@ -69,7 +70,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.light);
       }
     } catch (e) {
-     debugPrint('Error in light: $e'); 
+      debugPrint('Error in light: $e');
     }
   }
 
@@ -80,7 +81,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.medium);
       }
     } catch (e) {
-     debugPrint('Error in medium: $e');
+      debugPrint('Error in medium: $e');
     }
   }
 
@@ -91,7 +92,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.heavy);
       }
     } catch (e) {
-     debugPrint('Error in heavy: $e');
+      debugPrint('Error in heavy: $e');
     }
   }
 
@@ -102,7 +103,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.rigid);
       }
     } catch (e) {
-     debugPrint('Error in rigid: $e');
+      debugPrint('Error in rigid: $e');
     }
   }
 
@@ -113,7 +114,7 @@ class Vibrator {
         Haptics.vibrate(HapticsType.soft);
       }
     } catch (e) {
-     debugPrint('Error in soft: $e');
+      debugPrint('Error in soft: $e');
     }
   }
 
@@ -121,7 +122,7 @@ class Vibrator {
     try {
       Vibration.cancel();
     } catch (e) {
-     debugPrint('Error in cancelVibration: $e');
+      debugPrint('Error in cancelVibration: $e');
     }
   }
 
@@ -136,7 +137,7 @@ class Vibrator {
         Vibration.vibrate(pattern: pauses);
       }
     } catch (e) {
-     debugPrint('Error in vibrateWithPauses: $e');
+      debugPrint('Error in vibrateWithPauses: $e');
     }
   }
 }

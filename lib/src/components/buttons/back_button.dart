@@ -49,7 +49,8 @@ class CreativeUIBackButton extends StatelessWidget {
     final base = options ?? const CreativeUIButtonOptions();
 
     // Default visuals
-    final iconWidget = icon ??
+    final iconWidget =
+        icon ??
         Icon(
           Icons.arrow_back_rounded,
           color: base.style?.textStyle?.color ?? Colors.white,
@@ -72,7 +73,8 @@ class CreativeUIBackButton extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             labelText,
-            style: base.style?.textStyle ??
+            style:
+                base.style?.textStyle ??
                 const TextStyle(
                   color: Colors.white,
                   fontSize: 16,

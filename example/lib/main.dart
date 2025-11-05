@@ -62,8 +62,10 @@ class HomePage extends StatelessWidget {
                 variant: ButtonVariant.contained,
                 style: CreativeUIButtonStyle(
                   backgroundColor: cs.primary,
-                  textStyle: TextStyle(color: cs.onPrimary, fontWeight: FontWeight.w700),
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+                  textStyle: TextStyle(
+                      color: cs.onPrimary, fontWeight: FontWeight.w700),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
                   borderRadius: 14,
                 ),
                 icon: const Icon(Icons.flash_on, color: Colors.white),
@@ -72,7 +74,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-        
             Text('Outlined', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             CreativeUIButton(
@@ -80,8 +81,10 @@ class HomePage extends StatelessWidget {
                 variant: ButtonVariant.outlined,
                 style: CreativeUIButtonStyle(
                   borderColor: cs.primary,
-                  textStyle: TextStyle(color: cs.primary, fontWeight: FontWeight.w700),
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+                  textStyle:
+                      TextStyle(color: cs.primary, fontWeight: FontWeight.w700),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
                   borderRadius: 14,
                 ),
                 icon: Icon(Icons.border_all, color: cs.primary),
@@ -90,15 +93,16 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-        
             Text('Text', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             CreativeUIButton(
               options: CreativeUIButtonOptions(
                 variant: ButtonVariant.text,
                 style: CreativeUIButtonStyle(
-                  textStyle: TextStyle(color: cs.primary, fontWeight: FontWeight.w700),
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                  textStyle:
+                      TextStyle(color: cs.primary, fontWeight: FontWeight.w700),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                 ),
                 icon: Icon(Icons.text_fields, color: cs.primary),
                 labelText: 'Text Button',
@@ -106,7 +110,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-        
             Text('Animated', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             CreativeUIButton(
@@ -114,7 +117,8 @@ class HomePage extends StatelessWidget {
                 variant: ButtonVariant.animated,
                 style: CreativeUIButtonStyle(
                   backgroundColor: cs.primary,
-                  textStyle: TextStyle(color: cs.onPrimary, fontWeight: FontWeight.w700),
+                  textStyle: TextStyle(
+                      color: cs.onPrimary, fontWeight: FontWeight.w700),
                   size: const Size(160, 48),
                   borderRadius: 16,
                 ),
@@ -123,16 +127,18 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-        
-            Text('AsyncButton (awaits 2s)', style: Theme.of(context).textTheme.titleLarge),
+            Text('AsyncButton (awaits 2s)',
+                style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             AsyncButton(
               options: CreativeUIButtonOptions(
                 variant: ButtonVariant.contained,
                 style: CreativeUIButtonStyle(
                   backgroundColor: cs.secondary,
-                  textStyle: TextStyle(color: cs.onSecondary, fontWeight: FontWeight.w700),
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+                  textStyle: TextStyle(
+                      color: cs.onSecondary, fontWeight: FontWeight.w700),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
                   borderRadius: 14,
                 ),
                 labelText: 'Submit',
@@ -144,7 +150,6 @@ class HomePage extends StatelessWidget {
               onError: (e, st) => debugPrint('Async error: $e'),
             ),
             const SizedBox(height: 24),
-        
             Text('Animated With Effects',
                 style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
@@ -152,27 +157,29 @@ class HomePage extends StatelessWidget {
               options: CreativeUIButtonOptions(
                 variant: ButtonVariant.animated,
                 animatedButtonConfig: AnimatedButtonConfig(
-                borderRadius: 20,
-                shimmerHighlight: Colors.red,
-                sweepShimmerConfig: SweepShimmerConfig(
-                  highlightColor: Color(0xFF6dc6ff),
-                  pause: Duration(milliseconds: 1500),
-                  duration: Duration(milliseconds: 2000),
-                ),
-                effects: [
-                  ButtonEffect.sweepShimmer,
-                  ButtonEffect.shimmer,
-                  ButtonEffect.glow,
-                ]),
+                    borderRadius: 20,
+                    shimmerHighlight: Colors.red,
+                    sweepShimmerConfig: SweepShimmerConfig(
+                      highlightColor: Color(0xFF6dc6ff),
+                      pause: Duration(milliseconds: 1500),
+                      duration: Duration(milliseconds: 2000),
+                    ),
+                    effects: [
+                      ButtonEffect.sweepShimmer,
+                      ButtonEffect.shimmer,
+                      ButtonEffect.glow,
+                    ]),
                 child: Text(
                   "Animated With Effects",
                   style: TextStyle(fontSize: 24),
                 ),
                 style: CreativeUIButtonStyle(
-                  size:  Size(150, 50),
+                  size: Size(150, 50),
                   backgroundColor: Color(0xFF6dc6ff),
-                  textStyle: TextStyle(color: cs.onTertiary, fontWeight: FontWeight.w700),
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+                  textStyle: TextStyle(
+                      color: cs.onTertiary, fontWeight: FontWeight.w700),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
                   borderRadius: 20,
                 ),
                 labelText: 'Open Details',
@@ -181,7 +188,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 64),
-        
             Text('Navigate to Details (Back Button demo)',
                 style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
@@ -190,8 +196,10 @@ class HomePage extends StatelessWidget {
                 variant: ButtonVariant.contained,
                 style: CreativeUIButtonStyle(
                   backgroundColor: cs.tertiary,
-                  textStyle: TextStyle(color: cs.onTertiary, fontWeight: FontWeight.w700),
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+                  textStyle: TextStyle(
+                      color: cs.onTertiary, fontWeight: FontWeight.w700),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
                   borderRadius: 14,
                 ),
                 labelText: 'Open Details',
@@ -244,7 +252,8 @@ class DetailsPage extends StatelessWidget {
             variant: ButtonVariant.outlined,
             style: CreativeUIButtonStyle(
               borderColor: cs.primary,
-              textStyle: TextStyle(color: cs.primary, fontWeight: FontWeight.w700),
+              textStyle:
+                  TextStyle(color: cs.primary, fontWeight: FontWeight.w700),
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
               borderRadius: 14,
             ),

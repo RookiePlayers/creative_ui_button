@@ -17,18 +17,19 @@ class AnimatedButton extends StatefulWidget {
   final BoxShape shape;
   final AnimatedButtonConfig? config;
 
-  const AnimatedButton(
-      {super.key,
-      this.onPressed,
-      required this.child,
-      this.enabled = true,
-      this.color = Colors.blue,
-      this.height = 64,
-      this.shadowDegree = ShadowDegree.light,
-      this.width = 200,
-      this.duration = 70,
-      this.shape = BoxShape.rectangle,
-      this.config});
+  const AnimatedButton({
+    super.key,
+    this.onPressed,
+    required this.child,
+    this.enabled = true,
+    this.color = Colors.blue,
+    this.height = 64,
+    this.shadowDegree = ShadowDegree.light,
+    this.width = 200,
+    this.duration = 70,
+    this.shape = BoxShape.rectangle,
+    this.config,
+  });
 
   @override
   State<AnimatedButton> createState() => _AnimatedButtonState();
@@ -67,11 +68,13 @@ class _AnimatedButtonState extends State<AnimatedButton>
       duration: const Duration(milliseconds: 300),
     );
 
-    _burstAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _burstController, curve: Curves.easeOut),
-    );
+    _burstAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _burstController, curve: Curves.easeOut));
 
-    final duration = _config.sweepShimmerConfig?.duration ??
+    final duration =
+        _config.sweepShimmerConfig?.duration ??
         const Duration(milliseconds: 1800);
     _shimmerSweepController = AnimationController(
       vsync: this,
@@ -83,8 +86,9 @@ class _AnimatedButtonState extends State<AnimatedButton>
   void _startSweepAnimation() async {
     while (mounted && _config.enableSweepShimmer) {
       await _shimmerSweepController.forward(from: 0.0);
-      await Future.delayed(_config.sweepShimmerConfig?.pause ??
-          const Duration(milliseconds: 800));
+      await Future.delayed(
+        _config.sweepShimmerConfig?.pause ?? const Duration(milliseconds: 800),
+      );
     }
   }
 
@@ -117,10 +121,12 @@ class _AnimatedButtonState extends State<AnimatedButton>
                 height: height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                  color: _darken(widget.enabled ? widget.color : Colors.grey,
-                      widget.shadowDegree),
+                  color: _darken(
+                    widget.enabled ? widget.color : Colors.grey,
+                    widget.shadowDegree,
+                  ),
                   borderRadius: widget.shape != BoxShape.circle
-                      ? BorderRadius.circular( _config.borderRadius)
+                      ? BorderRadius.circular(_config.borderRadius)
                       : null,
                   shape: widget.shape,
                 ),
@@ -139,7 +145,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
                         decoration: BoxDecoration(
                           shape: widget.shape,
                           borderRadius: widget.shape != BoxShape.circle
-                              ? BorderRadius.circular( _config.borderRadius)
+                              ? BorderRadius.circular(_config.borderRadius)
                               : null,
                           boxShadow: [
                             BoxShadow(
@@ -181,7 +187,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
                   builder: (_, __) {
                     final shimmerAlpha = 0.2 + (_glowAnimation.value * 0.3);
                     return ClipRRect(
-                      borderRadius: BorderRadius.circular( _config.borderRadius),
+                      borderRadius: BorderRadius.circular(_config.borderRadius),
                       child: Container(
                         height: height,
                         width: widget.width,
@@ -189,8 +195,9 @@ class _AnimatedButtonState extends State<AnimatedButton>
                           color: widget.color.withValues(alpha: shimmerAlpha),
                           gradient: LinearGradient(
                             colors: [
-                              widget.color
-                                  .withValues(alpha: shimmerAlpha * 0.6),
+                              widget.color.withValues(
+                                alpha: shimmerAlpha * 0.6,
+                              ),
                               (_config.shimmerHighlight ??
                                       widget.color.withValues(alpha: 0.7))
                                   .withValues(alpha: shimmerAlpha),
@@ -210,35 +217,43 @@ class _AnimatedButtonState extends State<AnimatedButton>
               Positioned.fill(
                 child: IgnorePointer(
                   child: AnimatedBuilder(
-                      animation: _shimmerSweepController,
-                      builder: (_, __) {
-                        final sweepCfg = _config.sweepShimmerConfig;
-                        return ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular( _config.borderRadius),
-                            child: Transform.rotate(
-                              angle: sweepCfg?.angle ?? 180,
-                              child: Shimmer.fromColors(
-                                pause: sweepCfg?.pause ??
-                                    const Duration(milliseconds: 800),
-                                period: sweepCfg?.duration ??
-                                    const Duration(milliseconds: 1800),
-                                loop: sweepCfg?.loop ?? 0,
-                                direction:
-                                    sweepCfg?.direction ?? ShimmerDirection.ltr,
-                                baseColor: sweepCfg?.baseColor ??
-                                    widget.color.withValues(alpha: 0.2),
-                                highlightColor: sweepCfg?.highlightColor ??
-                                    widget.color.withValues(alpha: 0.1),
-                                child: Container(
-                                  color: sweepCfg?.baseColor ??
-                                      widget.color.withValues(alpha: 0.5),
-                                ),
-                              ),
-                            ));
-                      }),
+                    animation: _shimmerSweepController,
+                    builder: (_, __) {
+                      final sweepCfg = _config.sweepShimmerConfig;
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          _config.borderRadius,
+                        ),
+                        child: Transform.rotate(
+                          angle: sweepCfg?.angle ?? 180,
+                          child: Shimmer.fromColors(
+                            pause:
+                                sweepCfg?.pause ??
+                                const Duration(milliseconds: 800),
+                            period:
+                                sweepCfg?.duration ??
+                                const Duration(milliseconds: 1800),
+                            loop: sweepCfg?.loop ?? 0,
+                            direction:
+                                sweepCfg?.direction ?? ShimmerDirection.ltr,
+                            baseColor:
+                                sweepCfg?.baseColor ??
+                                widget.color.withValues(alpha: 0.2),
+                            highlightColor:
+                                sweepCfg?.highlightColor ??
+                                widget.color.withValues(alpha: 0.1),
+                            child: Container(
+                              color:
+                                  sweepCfg?.baseColor ??
+                                  widget.color.withValues(alpha: 0.5),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              )
+              ),
           ],
         ),
       ),
@@ -252,14 +267,15 @@ class _AnimatedButtonState extends State<AnimatedButton>
       decoration: BoxDecoration(
         color: widget.enabled ? widget.color : Colors.grey,
         borderRadius: widget.shape != BoxShape.circle
-            ? BorderRadius.circular( _config.borderRadius)
+            ? BorderRadius.circular(_config.borderRadius)
             : null,
         shape: widget.shape,
         boxShadow: _config.enableGlow
             ? [
                 BoxShadow(
-                  color: (_config.glowColor ?? widget.color)
-                      .withValues(alpha: 0.6 * glowStrength),
+                  color: (_config.glowColor ?? widget.color).withValues(
+                    alpha: 0.6 * glowStrength,
+                  ),
                   blurRadius: 16 * glowStrength,
                   spreadRadius: 1 * glowStrength,
                 ),

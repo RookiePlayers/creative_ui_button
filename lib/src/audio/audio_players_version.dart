@@ -7,7 +7,6 @@ class AudioPlayersVersion {
 
   AudioPlayer player = AudioPlayer();
 
-
   Future<void> clean({bool dispose = false}) async {
     try {
       if (dispose) {
@@ -22,9 +21,12 @@ class AudioPlayersVersion {
     }
   }
 
-  Future<void> setTrack({required String url, bool caching = false, bool isLoop = false}) async {
+  Future<void> setTrack({
+    required String url,
+    bool caching = false,
+    bool isLoop = false,
+  }) async {
     try {
-
       if (caching) {
         // await AudioPlayer.global.();
         // final audioSourceCached = LockCachingAudioSource(Uri.parse(url));
@@ -34,8 +36,9 @@ class AudioPlayersVersion {
       } else {
         final audioSource = UrlSource(url);
         await player.setSource(audioSource);
-        await player
-            .setReleaseMode(isLoop ? ReleaseMode.loop : ReleaseMode.release);
+        await player.setReleaseMode(
+          isLoop ? ReleaseMode.loop : ReleaseMode.release,
+        );
       }
     } on AudioPlayerException {
       // This call was interrupted since another audio source was loaded or the
@@ -47,7 +50,6 @@ class AudioPlayersVersion {
     await player.setPlayerMode(PlayerMode.mediaPlayer);
   }
 
- 
   playBGM(filename, {double volume = 1.0, bool? loop, double pan = 0.0}) async {
     //AudioCache cache = new AudioCache();
     try {
@@ -74,18 +76,21 @@ class AudioPlayersVersion {
       debugPrint("Error resuming audio: $e");
     }
   }
-  Future<dynamic> playAssetAudio(
-      {required String filename,
-      bool singleUse = false,
-      double volume = 1.0,
-      bool? loop,
-      double pan = 0.0}) async {
+
+  Future<dynamic> playAssetAudio({
+    required String filename,
+    bool singleUse = false,
+    double volume = 1.0,
+    bool? loop,
+    double pan = 0.0,
+  }) async {
     try {
       final player = singleUse ? AudioPlayer() : this.player;
       await player.setSource(AssetSource(filename));
       await player.setVolume(volume);
       await player.setReleaseMode(
-          loop == true ? ReleaseMode.loop : ReleaseMode.release);
+        loop == true ? ReleaseMode.loop : ReleaseMode.release,
+      );
       await player.resume();
       return player;
     } catch (e) {
@@ -93,17 +98,21 @@ class AudioPlayersVersion {
       return null;
     }
   }
-  Future<dynamic> playFileAudio(
-      {required String filename,
-      bool singleUse = false,
-      double volume = 1.0,
-      bool? loop,
-      double pan = 0.0}) async {
+
+  Future<dynamic> playFileAudio({
+    required String filename,
+    bool singleUse = false,
+    double volume = 1.0,
+    bool? loop,
+    double pan = 0.0,
+  }) async {
     try {
       final player = singleUse ? AudioPlayer() : this.player;
       await player.setSourceDeviceFile(filename);
-      await player.setReleaseMode(loop == true ? ReleaseMode.loop : ReleaseMode.release);
-      await player.setVolume(clampDouble(volume , 0, 1));
+      await player.setReleaseMode(
+        loop == true ? ReleaseMode.loop : ReleaseMode.release,
+      );
+      await player.setVolume(clampDouble(volume, 0, 1));
       player.resume();
       return player;
     } catch (e) {
@@ -132,8 +141,11 @@ class AudioPlayersVersion {
     return player.seek(position);
   }
 
-  playDuration(
-      {required Duration from, Duration? length, double? volume}) async {
+  playDuration({
+    required Duration from,
+    Duration? length,
+    double? volume,
+  }) async {
     try {
       debugPrint("Playing from: ${player.source}");
       //await player.seek(from);
@@ -158,5 +170,4 @@ class AudioPlayersVersion {
     await player.setReleaseMode(loop ? ReleaseMode.loop : ReleaseMode.release);
     await player.resume();
   }
-
 }

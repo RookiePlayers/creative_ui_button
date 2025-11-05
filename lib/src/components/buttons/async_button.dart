@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import 'package:creative_ui_button/src/components/buttons/base_button.dart' as btn; // CreativeUIButton
+import 'package:creative_ui_button/src/components/buttons/base_button.dart'
+    as btn; // CreativeUIButton
 import 'package:creative_ui_button/src/extensions/color.dart';
 import 'package:creative_ui_button/src/models/button_options.dart';
 
@@ -72,17 +73,21 @@ class _AsyncButtonState extends State<AsyncButton> {
       ),
     );
 
-    final normalChild = base.child ??
+    final normalChild =
+        base.child ??
         base.label ??
         AutoSizeText(
           base.labelText ?? '',
           maxLines: 1,
-          style: base.style?.textStyle ??
+          style:
+              base.style?.textStyle ??
               TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: (base.style?.backgroundColor ?? Theme.of(context).colorScheme.primary)
-                    .withShade(0.4),
+                color:
+                    (base.style?.backgroundColor ??
+                            Theme.of(context).colorScheme.primary)
+                        .withShade(0.4),
               ),
         );
 
@@ -91,7 +96,8 @@ class _AsyncButtonState extends State<AsyncButton> {
       duration: const Duration(milliseconds: 160),
       switchInCurve: Curves.easeOut,
       switchOutCurve: Curves.easeIn,
-      transitionBuilder: (child, anim) => FadeTransition(opacity: anim, child: child),
+      transitionBuilder: (child, anim) =>
+          FadeTransition(opacity: anim, child: child),
       child: _isLoading ? loadingChild : normalChild,
     );
 
@@ -117,15 +123,12 @@ class _AsyncButtonState extends State<AsyncButton> {
 
     return Semantics(
       // Accessible name. Prefer labelText, fallback to key or generic.
-      label: base.labelText ??
-          (base.key?.toString() ?? 'Async button'),
+      label: base.labelText ?? (base.key?.toString() ?? 'Async button'),
       // Announce busy state to assistive tech
       // (Flutter will treat this as a live region change when toggled).
       enabled: !effectiveOptions.disabled,
       // You could add `value: _isLoading ? 'Loading' : 'Idle'`
-      child: btn.CreativeUIButton(
-        options: effectiveOptions,
-      ),
+      child: btn.CreativeUIButton(options: effectiveOptions),
     );
   }
 

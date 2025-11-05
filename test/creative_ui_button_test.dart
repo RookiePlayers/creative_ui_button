@@ -121,7 +121,9 @@ void main() {
     expect(find.text('Second'), findsOneWidget);
   });
 
-  testWidgets('Custom options render & onBack override is used', (tester) async {
+  testWidgets('Custom options render & onBack override is used', (
+    tester,
+  ) async {
     bool called = false;
 
     final root = Scaffold(

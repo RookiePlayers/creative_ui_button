@@ -7,15 +7,9 @@ enum AnimationType { pulsing, floating }
 
 enum ButtonVariant { animated, outlined, text, contained }
 
-
 enum ShadowDegree { light, dark }
 
-enum ButtonEffect {
-  glow,
-  shimmer,
-  sweepShimmer,
-  burst,
-}
+enum ButtonEffect { glow, shimmer, sweepShimmer, burst }
 
 class SweepShimmerConfig {
   final Duration duration;
@@ -61,7 +55,6 @@ class AnimatedButtonConfig {
   bool get enableSweepShimmer => effects.contains(ButtonEffect.sweepShimmer);
   bool get enableBurst => effects.contains(ButtonEffect.burst);
 }
-
 
 class CreativeUIButtonStyle {
   final Color? backgroundColor;
@@ -202,8 +195,7 @@ class CreativeUIButtonOptions {
       style: style ?? this.style,
       animationOptions: animationOptions ?? this.animationOptions,
       soundOptions: soundOptions ?? this.soundOptions,
-      animatedButtonConfig:
-          animatedButtonConfig ?? this.animatedButtonConfig,
+      animatedButtonConfig: animatedButtonConfig ?? this.animatedButtonConfig,
       onPressed: onPressed ?? this.onPressed,
     );
   }

@@ -36,18 +36,18 @@ class Shimmer extends StatefulWidget {
     this.direction = ShimmerDirection.ltr,
     this.loop = 0,
     this.enabled = true,
-  })  : gradient = LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.centerRight,
-          colors: <Color>[
-            baseColor,
-            baseColor,
-            highlightColor,
-            baseColor,
-            baseColor,
-          ],
-          stops: const <double>[0.0, 0.35, 0.5, 0.65, 1.0],
-        );
+  }) : gradient = LinearGradient(
+         begin: Alignment.topLeft,
+         end: Alignment.centerRight,
+         colors: <Color>[
+           baseColor,
+           baseColor,
+           highlightColor,
+           baseColor,
+           baseColor,
+         ],
+         stops: const <double>[0.0, 0.35, 0.5, 0.65, 1.0],
+       );
 
   @override
   State createState() => _ShimmerState();
@@ -213,7 +213,7 @@ class _ShimmerFilter extends RenderProxyBox {
           rect = Rect.fromLTWH(dx, dy - height, width, 3 * height);
           break;
         case ShimmerDirection.ltr:
-        dx = _offset(-width, width, _percent);
+          dx = _offset(-width, width, _percent);
           rect = Rect.fromLTWH(dx - width, dy, 3 * width, height);
           break;
       }

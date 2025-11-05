@@ -6,37 +6,36 @@ extension ColorExtention on Color {
   Color withTint(double factor) => ColorMisc.withTint(this, factor);
 
   Color get contrastText => ColorMisc.contrastText(this);
-  
+
   static Color fromHex(String hexString) => ColorMisc.fromHex(hexString);
 
-  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+  String toHex({bool leadingHashSign = true}) =>
+      '${leadingHashSign ? '#' : ''}'
       '${a.round().toRadixString(16).padLeft(2, '0')}'
       '${r.round().toRadixString(16).padLeft(2, '0')}'
       '${g.round().toRadixString(16).padLeft(2, '0')}'
       '${b.round().toRadixString(16).padLeft(2, '0')}';
 
   Color withOpacity(double opacity) => withAlpha((255.0 * opacity).round());
-  
 }
-
 
 class ColorMisc {
   ///This class Applies values to colors and return either a darker shade or lighter tone of the same color
 
   ///shade_factor < 1.0
   static Color withShade(Color color, num shadeFactor) {
-    var r = ((color.r  * 255)) * (1 - shadeFactor);
-    var g = ((color.g  * 255)) * (1 - shadeFactor);
-    var b = ((color.b  * 255)) * (1 - shadeFactor);
-    return Color.fromRGBO(r.toInt(), g.toInt(), b.toInt(),color.a);
+    var r = ((color.r * 255)) * (1 - shadeFactor);
+    var g = ((color.g * 255)) * (1 - shadeFactor);
+    var b = ((color.b * 255)) * (1 - shadeFactor);
+    return Color.fromRGBO(r.toInt(), g.toInt(), b.toInt(), color.a);
   }
 
   ///tint_factor < 1.0
   static Color withTint(Color color, num tintFactor) {
-    var r = ((color.r  * 255) + (255 - (color.r * 255)) * tintFactor);
-    var g = ((color.g  * 255) + (255 - (color.g * 255)) * tintFactor);
-    var b = ((color.b  * 255) + (255 - (color.b * 255)) * tintFactor);
-     return Color.fromRGBO(r.toInt(), g.toInt(), b.toInt(),color.a);
+    var r = ((color.r * 255) + (255 - (color.r * 255)) * tintFactor);
+    var g = ((color.g * 255) + (255 - (color.g * 255)) * tintFactor);
+    var b = ((color.b * 255) + (255 - (color.b * 255)) * tintFactor);
+    return Color.fromRGBO(r.toInt(), g.toInt(), b.toInt(), color.a);
   }
 
   static Color contrastText(Color bgColor) {
@@ -61,6 +60,7 @@ class ColorMisc {
   }
 
   static String toHex(Color color, {bool leadingHashSign = true}) {
+    // ignore: deprecated_member_use
     final hex = color.value.toRadixString(16).padLeft(8, '0');
     return (leadingHashSign ? '#' : '') + hex.substring(2);
   }
