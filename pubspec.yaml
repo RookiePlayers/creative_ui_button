@@ -1,7 +1,7 @@
 name: creative_ui_button
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/RookiePlayers/creative_ui_button.git
 
 environment:
   sdk: ^3.9.2
