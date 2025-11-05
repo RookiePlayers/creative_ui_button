@@ -1,3 +1,7 @@
+[![pub package](https://img.shields.io/pub/v/creative_ui_button.svg)](https://pub.dev/packages/creative_ui_button)
+[![likes](https://img.shields.io/pub/likes/creative_ui_button)](https://pub.dev/packages/creative_ui_button/score)
+[![pub points](https://img.shields.io/pub/points/creative_ui_button)](https://pub.dev/packages/creative_ui_button/score)
+[![Flutter](https://img.shields.io/badge/Flutter-%E2%9D%A4-blue)](https://flutter.dev)
 # 🎨 Creative UI Button
 
 A beautifully animated, theme-aware, and highly customizable button library for Flutter.  
