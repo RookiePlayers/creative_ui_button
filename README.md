@@ -4,6 +4,9 @@ A beautifully animated, theme-aware, and highly customizable button library for 
 It supports multiple variants, async actions, built-in sound and haptic feedback, and smart navigation helpers — all with Material-3-ready design.
 
 ---
+<img width="1145" height="916" alt="image" src="https://github.com/user-attachments/assets/25876a33-b90a-4aa3-8d75-6fccc9a93991" />
+
+---
 
 ## ✨ Features
 
