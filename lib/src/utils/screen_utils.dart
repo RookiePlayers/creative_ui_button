@@ -123,10 +123,11 @@ EdgeInsets padding({
   double top = 0,
   double right = 0,
   double bottom = 0,
-}) => ScreenUtils.instance.padding(
-  left: left,
-  top: top,
-  right: right,
-  bottom: bottom,
-);
+}) =>
+    ScreenUtils.instance.padding(
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+    );
 bool get isTablet => ScreenUtils.instance.isTablet;

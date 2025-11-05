@@ -9,8 +9,7 @@ extension ColorExtention on Color {
 
   static Color fromHex(String hexString) => ColorMisc.fromHex(hexString);
 
-  String toHex({bool leadingHashSign = true}) =>
-      '${leadingHashSign ? '#' : ''}'
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
       '${a.round().toRadixString(16).padLeft(2, '0')}'
       '${r.round().toRadixString(16).padLeft(2, '0')}'
       '${g.round().toRadixString(16).padLeft(2, '0')}'

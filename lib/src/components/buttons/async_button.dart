@@ -73,21 +73,18 @@ class _AsyncButtonState extends State<AsyncButton> {
       ),
     );
 
-    final normalChild =
-        base.child ??
+    final normalChild = base.child ??
         base.label ??
         AutoSizeText(
           base.labelText ?? '',
           maxLines: 1,
-          style:
-              base.style?.textStyle ??
+          style: base.style?.textStyle ??
               TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color:
-                    (base.style?.backgroundColor ??
-                            Theme.of(context).colorScheme.primary)
-                        .withShade(0.4),
+                color: (base.style?.backgroundColor ??
+                        Theme.of(context).colorScheme.primary)
+                    .withShade(0.4),
               ),
         );
 

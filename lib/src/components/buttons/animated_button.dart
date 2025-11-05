@@ -73,8 +73,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
       end: 1.0,
     ).animate(CurvedAnimation(parent: _burstController, curve: Curves.easeOut));
 
-    final duration =
-        _config.sweepShimmerConfig?.duration ??
+    final duration = _config.sweepShimmerConfig?.duration ??
         const Duration(milliseconds: 1800);
     _shimmerSweepController = AnimationController(
       vsync: this,
@@ -227,24 +226,19 @@ class _AnimatedButtonState extends State<AnimatedButton>
                         child: Transform.rotate(
                           angle: sweepCfg?.angle ?? 180,
                           child: Shimmer.fromColors(
-                            pause:
-                                sweepCfg?.pause ??
+                            pause: sweepCfg?.pause ??
                                 const Duration(milliseconds: 800),
-                            period:
-                                sweepCfg?.duration ??
+                            period: sweepCfg?.duration ??
                                 const Duration(milliseconds: 1800),
                             loop: sweepCfg?.loop ?? 0,
                             direction:
                                 sweepCfg?.direction ?? ShimmerDirection.ltr,
-                            baseColor:
-                                sweepCfg?.baseColor ??
+                            baseColor: sweepCfg?.baseColor ??
                                 widget.color.withValues(alpha: 0.2),
-                            highlightColor:
-                                sweepCfg?.highlightColor ??
+                            highlightColor: sweepCfg?.highlightColor ??
                                 widget.color.withValues(alpha: 0.1),
                             child: Container(
-                              color:
-                                  sweepCfg?.baseColor ??
+                              color: sweepCfg?.baseColor ??
                                   widget.color.withValues(alpha: 0.5),
                             ),
                           ),

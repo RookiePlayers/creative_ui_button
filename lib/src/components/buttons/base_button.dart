@@ -98,8 +98,7 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
     final cs = t.colorScheme;
 
     final basePrim = inStyle.backgroundColor ?? cs.primary;
-    final defaultPadding =
-        inStyle.padding ??
+    final defaultPadding = inStyle.padding ??
         const EdgeInsets.symmetric(vertical: 10, horizontal: 14);
 
     switch (variant) {
@@ -110,8 +109,7 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
           borderWidth: inStyle.borderWidth ?? 0,
           borderRadius: inStyle.borderRadius ?? 12,
           padding: defaultPadding,
-          textStyle:
-              inStyle.textStyle ??
+          textStyle: inStyle.textStyle ??
               TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -142,8 +140,7 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
           borderWidth: inStyle.borderWidth ?? 1.5,
           borderRadius: inStyle.borderRadius ?? 12,
           padding: defaultPadding,
-          textStyle:
-              inStyle.textStyle ??
+          textStyle: inStyle.textStyle ??
               TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -163,11 +160,9 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
           borderColor: Colors.transparent,
           borderWidth: 0,
           borderRadius: inStyle.borderRadius ?? 12,
-          padding:
-              inStyle.padding ??
+          padding: inStyle.padding ??
               const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-          textStyle:
-              inStyle.textStyle ??
+          textStyle: inStyle.textStyle ??
               TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -230,8 +225,7 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
 
   // Floating/hover effect
   Widget _withHoveringAnimation(BuildContext context, Widget child) {
-    final hasFloat =
-        _effective.animationOptions?.animationOptions.containsKey(
+    final hasFloat = _effective.animationOptions?.animationOptions.containsKey(
           AnimationType.floating,
         ) ??
         false;
@@ -251,8 +245,7 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
 
   // Pulse effect
   Widget _withPulseAnimation(BuildContext context, Widget child) {
-    final hasPulse =
-        _effective.animationOptions?.animationOptions.containsKey(
+    final hasPulse = _effective.animationOptions?.animationOptions.containsKey(
           AnimationType.pulsing,
         ) ??
         false;
@@ -336,10 +329,17 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
     required ButtonVariant variant,
   }) {
     final cs = Theme.of(ctx).colorScheme;
-    final Color base = switch (variant) {
-      ButtonVariant.contained || ButtonVariant.animated => cs.onPrimary,
-      ButtonVariant.outlined || ButtonVariant.text => cs.primary,
-    };
+    Color base = Colors.black;
+    switch (variant) {
+      case ButtonVariant.contained:
+      case ButtonVariant.animated:
+        base = cs.onPrimary;
+        break;
+      case ButtonVariant.outlined:
+      case ButtonVariant.text:
+        base = cs.primary;
+        break;
+    }
 
     double opacity = 0.0;
     if (_isHovered) opacity = opacity._max(0.08);
@@ -383,25 +383,22 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
       borderRadius: radius,
       border: isOutlined
           ? Border.all(
-              color:
-                  st.borderColor ??
+              color: st.borderColor ??
                   st.textStyle?.color ??
                   Theme.of(context).colorScheme.primary,
               width: st.borderWidth ?? 1.5,
             )
           : (st.borderColor != null && (st.borderWidth ?? 0) > 0
-                ? Border.all(color: st.borderColor!, width: st.borderWidth!)
-                : null),
-      boxShadow: st.applyShadow && st.boxShadow != null
-          ? [st.boxShadow!]
-          : null,
+              ? Border.all(color: st.borderColor!, width: st.borderWidth!)
+              : null),
+      boxShadow:
+          st.applyShadow && st.boxShadow != null ? [st.boxShadow!] : null,
     );
 
     final buttonCore = Container(
       height: st.size?.height,
       width: st.size?.width,
-      padding:
-          st.padding ??
+      padding: st.padding ??
           const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
       decoration: decoration,
       child: _effective.child ?? _contentRow(),
@@ -416,8 +413,7 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
               _effective.label ??
                   Text(
                     _effective.labelText ?? "",
-                    style:
-                        st.textStyle ??
+                    style: st.textStyle ??
                         TextStyle(
                           color: Theme.of(context).colorScheme.onPrimary,
                           fontSize: 16,
@@ -436,18 +432,15 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
     final cs = Theme.of(context).colorScheme;
     final fg = st.textStyle?.color ?? st.backgroundColor ?? cs.primary;
 
-    final content =
-        _effective.child ??
+    final content = _effective.child ??
         Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: _iconThenLabel(
-            label:
-                _effective.label ??
+            label: _effective.label ??
                 Text(
                   _effective.labelText ?? "",
-                  style:
-                      st.textStyle ??
+                  style: st.textStyle ??
                       TextStyle(
                         color: fg,
                         fontSize: 16,
@@ -482,12 +475,10 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
     if (_effective.style?.shape != BoxShape.circle) {
       children.add(
         Flexible(
-          child:
-              label ??
+          child: label ??
               Text(
                 _effective.labelText ?? "",
-                style:
-                    _effective.style?.textStyle ??
+                style: _effective.style?.textStyle ??
                     TextStyle(
                       color: Theme.of(context).colorScheme.onPrimary,
                       fontSize: 16,
@@ -505,8 +496,7 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
     final cs = Theme.of(context).colorScheme;
 
     final defaultText = TextStyle(
-      color:
-          (_effective.variant == ButtonVariant.contained ||
+      color: (_effective.variant == ButtonVariant.contained ||
               _effective.variant == ButtonVariant.animated)
           ? (st.textStyle?.color ?? cs.onPrimary)
           : (st.textStyle?.color ?? st.backgroundColor ?? cs.primary),
@@ -518,8 +508,7 @@ class _CreativeUIButtonState extends State<CreativeUIButton> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: _iconThenLabel(
-        label:
-            _effective.label ??
+        label: _effective.label ??
             Text(
               _effective.labelText ?? "",
               style: st.textStyle ?? defaultText,
