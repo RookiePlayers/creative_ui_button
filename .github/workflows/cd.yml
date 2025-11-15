@@ -19,7 +19,10 @@ on:
 
 jobs:
     publish:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-latest 
+        permissions:
+          id-token: write   # required for OIDC
+          contents: read
 
         steps:
           - name: Checkout code
@@ -35,9 +38,11 @@ jobs:
           - name: Install dependencies
             run: flutter pub get
 
-          - name: Publish to pub.dev
-            env:
-              PUB_DEV_ACCESS_TOKEN: ${{ secrets.PUB_DEV_ACCESS_TOKEN }}
-            run: |
-                echo "$PUB_DEV_ACCESS_TOKEN" > ~/.pub-cache/credentials.json
-                flutter pub publish --force
+          - name: 🧩 Setup pub.dev credentials (OIDC)
+            uses: flutter-actions/setup-pubdev-credentials@v1
+
+          - name: 📦 Install dependencies
+            run: flutter pub get
+
+          - name: 🚀 Publish to pub.dev
+            run: flutter pub publish --force
