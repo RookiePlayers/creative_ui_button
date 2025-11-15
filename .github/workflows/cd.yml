@@ -10,6 +10,12 @@ on:
               options:
                  - development
                  - production
+    workflow_call:
+        inputs:
+            target-env:
+              description: 'Select the target environment for deployment'
+              required: true
+              type: string
 
 jobs:
     publish:

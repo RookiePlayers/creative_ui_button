@@ -1,0 +1,74 @@
+name: Flutter Semantic Release
+
+on:
+  workflow_call:
+    inputs:
+      target-env:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      target-env:
+        description: "Environment to build for"
+        required: true
+        type: choice
+        options:
+          - production
+          - staging
+          - sandbox
+jobs:
+  release:
+    runs-on: macos-latest  #Note: mac runs are not cheap. Needed for PlistBuddy (used in update_version.sh)
+
+    steps:
+      - name: 🛎️ Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Needed for semantic-release to analyze full history
+
+      - name: 🧰 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: 📦 Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
+          channel: stable
+
+      - name: ♻️ Cache Flutter and Node dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            .dart_tool
+            release/node_modules
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml', '**/package.json') }}
+
+      - name: 📥 Install Flutter and Node dependencies
+        run: |
+          flutter pub get
+          cd release
+          npm ci
+
+      - name: 🚀 Run Semantic Release
+        run: npx semantic-release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🏷️ Extract latest tag
+        run: |
+          git fetch --tags
+          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo "$LATEST_TAG" > version.txt
+          echo "version=$LATEST_TAG" >> $GITHUB_ENV
+
+      - name: 🧾 Extract latest changelog section
+        run: awk '/^## /{if (seen) exit; seen=1} seen' CHANGELOG.md > changelog.txt
+
+      - name: 📤 Upload release version
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-release-version
+          path: version.txt
