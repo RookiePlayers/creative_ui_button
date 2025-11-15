@@ -57,8 +57,7 @@ jobs:
           channel: "stable"
           cache: true
 
-      - run: flutter pub get | 
-             cd widget_catalog && flutter pub get & cd ..
+      - run: flutter pub get
 
       - name: Run Linter
         run: flutter analyze
@@ -81,5 +80,4 @@ jobs:
         - run: flutter pub get
 
         - name: Run Tests
-          run: flutter test | 
-             cd widget_catalog && flutter pub get & cd ..
+          run: flutter test
