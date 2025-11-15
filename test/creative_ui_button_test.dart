@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 // Update these imports to your actual paths:
 import 'package:creative_ui_button/src/models/button_options.dart';
 
+const double _kBackLeadingWidth = 140;
+
 Widget _appWithRoutes({required Widget home}) {
   return MaterialApp(
     routes: {
@@ -41,6 +43,7 @@ class _SecondPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Second'),
+        leadingWidth: _kBackLeadingWidth,
         leading: const CreativeUIBackButton(), // uses default (outlined)
       ),
       body: const Center(child: Text('Second Body')),
@@ -53,6 +56,7 @@ void main() {
     final rootWithBack = Scaffold(
       appBar: AppBar(
         title: const Text('Root'),
+        leadingWidth: _kBackLeadingWidth,
         leading: const CreativeUIBackButton(autoHide: true),
       ),
       body: const SizedBox(),
@@ -95,6 +99,7 @@ void main() {
     final root = Scaffold(
       appBar: AppBar(
         title: const Text('Root'),
+        leadingWidth: _kBackLeadingWidth,
         leading: const CreativeUIBackButton(
           fallbackRoute: '/home',
           autoHide: false, // show the button even if stack can't pop
@@ -129,6 +134,7 @@ void main() {
     final root = Scaffold(
       appBar: AppBar(
         title: const Text('Root'),
+        leadingWidth: _kBackLeadingWidth,
         leading: CreativeUIBackButton(
           onBack: () => called = true,
           label: 'Custom Back',
