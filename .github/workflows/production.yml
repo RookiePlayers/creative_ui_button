@@ -21,11 +21,3 @@ jobs:
         with:
             target-env: "production"
         secrets: inherit
-
-    deploy-pub:
-        name: Deploy to Pub.dev
-        needs: [tagged-release]
-        uses: ./.github/workflows/cd.yml
-        with:
-            target-env: "production"
-        secrets: inherit
