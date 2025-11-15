@@ -1,0 +1,35 @@
+name: Deploy to pub.dev
+
+on: 
+    workflow_dispatch:
+        inputs:
+            target-env:
+              description: 'Select the target environment for deployment'
+              required: true
+              type: choice
+              options:
+                 - development
+                 - production
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+
+          - name: Set up Flutter
+            uses: subosito/flutter-action@v2
+            with:
+               flutter-version: 'stable'
+
+          - name: Install dependencies
+            run: flutter pub get
+
+          - name: Publish to pub.dev
+            env:
+              PUB_DEV_ACCESS_TOKEN: ${{ secrets.PUB_DEV_ACCESS_TOKEN }}
+            run: |
+                echo "$PUB_DEV_ACCESS_TOKEN" > ~/.pub-cache/credentials.json
+                flutter pub publish --force
