@@ -58,6 +58,23 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: 🔁 Force bump if build number unchanged
+        continue-on-error: true
+        run: |
+          CURRENT_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          BUILD_NUMBER=$(cat release/build_number.txt)
+          echo "🔎 Version in pubspec: $CURRENT_VERSION"
+          echo "🔎 Last known build number: $BUILD_NUMBER"
+
+          # Check if current version ends in current build number
+          if [[ "$CURRENT_VERSION" =~ \+$BUILD_NUMBER$ ]]; then
+            echo "✅ Build number matches"
+          else
+            echo "⚠️ Build number mismatch or not updated — forcing update"
+            NEW_BUILD=$((BUILD_NUMBER + 1))
+            echo "$NEW_BUILD" > release/build_number.txt
+            bash release/scripts/update_version.sh $(echo $CURRENT_VERSION | cut -d+ -f1)
+
       - name: 🏷️ Extract latest tag
         run: |
           git fetch --tags
