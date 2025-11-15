@@ -1,6 +1,6 @@
 name: creative_ui_button
 description: "Theme-aware, animated buttons for Flutter: contained, outlined, text, and animated variants with async and smart back."
-version: 0.0.2
+version: 1.0.0
 homepage: https://github.com/RookiePlayers/creative_ui_button.git
 repository: https://github.com/RookiePlayers/creative_ui_button.git
 issues: https://github.com/RookiePlayers/creative_ui_button.git/issues

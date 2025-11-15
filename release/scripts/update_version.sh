@@ -16,7 +16,7 @@ fi
 echo "🧩 Input semantic version: $VERSION"
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-REPO_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
+REPO_ROOT="$( cd "$SCRIPT_DIR/../.." && pwd )"
 
 BUILD_NUMBER_FILE="$REPO_ROOT/release/build_number.txt"
 PUBSPEC_FILE="$REPO_ROOT/pubspec.yaml"
