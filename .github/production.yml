@@ -1,0 +1,30 @@
+name: Production CI
+on:
+    push:
+        branches:
+            - Production
+    workflow_dispatch:
+
+jobs:
+    ci:
+        name: Production CI Pipeline
+        uses: ./.github/workflows/ci.yml
+        with:
+            target-env: "production"
+        secrets: inherit
+    
+    
+    tagged-release:
+        name: Tagged Release for Production
+        needs: [ci]
+        uses: ./.github/workflows/release.yml
+        with:
+            target-env: "production"
+        secrets: inherit
+
+    deploy-pub:
+        name: Deploy to Pub.dev
+        needs: [tagged-release]
+        with:
+            target-env: "production"
+        secrets: inherit

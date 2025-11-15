@@ -41,8 +41,9 @@ class CreativeUIBackButton extends StatelessWidget {
     final canPop = navigator.canPop();
     final hasFallback = fallbackRoute != null && fallbackRoute!.isNotEmpty;
 
-    // Hide the button if there's no route to pop and no fallback route
-    if (autoHide && !canPop && !hasFallback) {
+    // Hide the button if there's no route to pop and no fallback route/onBack handler
+    final shouldHide = autoHide && onBack == null && !canPop && !hasFallback;
+    if (shouldHide) {
       return const SizedBox.shrink();
     }
 
@@ -70,14 +71,19 @@ class CreativeUIBackButton extends StatelessWidget {
         children: [
           iconWidget,
           const SizedBox(width: 8),
-          Text(
-            labelText,
-            style: base.style?.textStyle ??
-                const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+          Flexible(
+            child: Text(
+              labelText,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              style: base.style?.textStyle ??
+                  const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
           ),
         ],
       ),

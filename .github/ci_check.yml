@@ -1,0 +1,17 @@
+name: CI_Check
+on:
+    push:
+        branches:
+            - feature/**
+            - fix/**
+    workflow_dispatch:
+
+jobs:
+    ci:
+        name: CI_Check
+        uses: ./.github/workflows/ci.yml
+        with:
+            target-env: "development"
+        secrets: inherit
+
+

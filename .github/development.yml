@@ -1,0 +1,22 @@
+name: Development CI
+on:
+    push:
+        branches:
+            - development
+    workflow_dispatch:
+
+jobs:
+    ci:
+        name: Development CI Pipeline
+        uses: ./.github/workflows/ci.yml
+        with:
+            target-env: "development"
+        secrets: inherit
+    
+    tagged-release:
+        name: Tagged Release for Development
+        needs: [ci]
+        uses: ./.github/workflows/release.yml
+        with:
+            target-env: "development"
+        secrets: inherit
