@@ -74,6 +74,7 @@ jobs:
             NEW_BUILD=$((BUILD_NUMBER + 1))
             echo "$NEW_BUILD" > release/build_number.txt
             bash release/scripts/update_version.sh $(echo $CURRENT_VERSION | cut -d+ -f1)
+          fi
 
       - name: 🏷️ Extract latest tag
         run: |
