@@ -1,0 +1,8 @@
+[
+  {
+    "key": "cmd+shift+g",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Flutter: pub get + Husky (Node)",
+    "when": "config.dart.enablePub && dart-code:anyFlutterProjectLoaded && resourceFilename == pubspec.yaml"
+  }
+]

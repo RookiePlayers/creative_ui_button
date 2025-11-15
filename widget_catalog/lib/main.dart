@@ -14,9 +14,7 @@ class WidgetBookCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Widgetbook.material(directories: [
-        
-      ],
+    return Widgetbook.material(directories: directories
     );
   }
 }

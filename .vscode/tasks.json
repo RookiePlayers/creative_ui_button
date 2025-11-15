@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flutter: pub get + Husky (Dart)",
+      "type": "shell",
+      "command": "flutter pub get && dart run husky install",
+      "problemMatcher": []
+    },
+  ]
+}

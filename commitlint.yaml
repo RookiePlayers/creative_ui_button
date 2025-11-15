@@ -1,0 +1,57 @@
+# commitlint.yaml
+
+# Parse the header so that:
+# - type is one of the allowed types
+# - scope MUST be a TASK-ID like TP-123 (project key 2+ uppercase letters, may include digits)
+# - subject follows after ": "
+parserPreset:
+  parserOpts:
+    headerPattern: '^(?<type>feat|fix|docs|style|refactor|perf|test|chore|ci|build|revert)(?:\((?<scope>[A-Z]{2,}[A-Z0-9]*-\d+)\))?: (?<subject>.+)$'
+    headerCorrespondence:
+      - type
+      - scope
+      - subject
+
+# Custom rules
+rules:
+  # Ensure the type is in lowercase (must follow conventional commit types)
+  type-case:
+    - 2
+    - always
+    - lower-case
+
+  # Ensure the subject is in sentence-case
+  subject-case:
+    - 2
+    - always
+    - sentence-case
+
+  # Require a scope (the headerPattern already enforces the TASK-ID format)
+  scope-empty:
+    - 2
+    - never
+
+  # Define valid commit message types (feat, fix, docs, etc.)
+  type-enum:
+    - 2
+    - always
+    - [feat, fix, docs, style, refactor, perf, test, chore, ci, build, revert]
+
+  # Body/footer formatting
+  body-max-line-length:
+    - 2
+    - always
+    - 500
+
+  footer-max-line-length:
+    - 2
+    - always
+    - 100
+
+  # Ensure the subject is not empty
+  subject-empty:
+    - 2
+    - never
+
+# Use commitlint's built-in default ignores (merge commits, etc.)
+defaultIgnores: true

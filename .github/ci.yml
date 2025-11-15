@@ -1,0 +1,83 @@
+name: Kazam CI Flow
+
+on:
+  workflow_call:
+    inputs:
+      target-env:
+        required: true
+        type: string
+      is-release-build:
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  commit-lint:
+    name: Lint Commit Messages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "stable"
+
+      - name: Activate commitlint_cli
+        run: dart pub global activate commitlint_cli
+        
+      - name: Get latest commit message
+        id: commit
+        run: |
+          {
+            echo 'msg<<EOF'
+            git log --format=%B -n 1 ${{ github.event.head_commit.id }}
+            echo 'EOF'
+          } >> $GITHUB_OUTPUT
+
+      - name: Lint Commit Message using commitlint.yml
+        run: echo "${{ steps.commit.outputs.msg }}" | dart pub global run commitlint_cli --config commitlint.yaml
+
+  
+  linter:
+    name: Run Flutter Linter
+    runs-on: ubuntu-latest
+    needs: commit-lint
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Flutter Dependencies
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.35.0"
+          channel: "stable"
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Run Linter
+        run: flutter analyze
+    
+  tests:
+      name: Run Flutter Tests
+      runs-on: ubuntu-latest
+      needs: linter
+
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Install Flutter Dependencies
+          uses: subosito/flutter-action@v2
+          with:
+            flutter-version: "3.35.0"
+            channel: "stable"
+            cache: true
+
+        - run: flutter pub get
+
+        - name: Run Tests
+          run: flutter test
